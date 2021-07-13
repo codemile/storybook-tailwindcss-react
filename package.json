@@ -2,9 +2,10 @@
   "name": "storybook-tailwindcss-react",
   "version": "0.1.0",
   "scripts": {
-    "start": "craco start",
+    "start": "cross-env TAILWIND_MODE=watch craco start",
     "build": "craco build",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook:broken": "cross-env TAILWIND_MODE=watch start-storybook -p 6006 -s public",
+    "storybook:works": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
@@ -19,6 +20,19 @@
       "last 1 safari version"
     ]
   },
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "dependencies": {},
   "devDependencies": {
     "@craco/craco": "^6.2.0",
     "@storybook/addon-actions": "^6.3.4",
@@ -32,24 +46,12 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "autoprefixer": "^9",
+    "cross-env": "^7.0.3",
     "postcss": "^7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@2.2.4",
     "typescript": "^4.1.2"
-  },
-  "dependencies": {},
-  "eslintConfig": {
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
   }
 }
